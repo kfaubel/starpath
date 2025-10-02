@@ -1,0 +1,101 @@
+/* Global CSS reset and basic styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #0a0e1a;
+  color: #ffffff;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* CSS styles for the astronomical polar plot */
+
+/* Frame border around the plot */
+.frame {
+  fill: none;
+  stroke: #000;
+}
+
+/* Text labels for elevation angles and compass directions */
+.axis text {
+  font: 12px sans-serif;
+  fill: #cccccc;
+}
+
+/* Compass direction labels - larger and bolder */
+.a.axis text {
+  font-size: 14px;
+  font-weight: bold;
+  fill: #ffffff;
+}
+
+/* Grid lines and elevation circles */
+.axis line,
+.axis circle {
+  fill: none;
+  stroke: #444;
+  stroke-dasharray: 1,4; /* Dashed lines for grid */
+}
+
+/* Outermost circle (horizon) gets solid line */
+.axis :first-of-type circle {
+  stroke: #666;
+  stroke-dasharray: none; /* Solid line for horizon */
+}
+
+/* Path of celestial objects (star trails) */
+.line {
+  fill: none;
+  stroke: #ff4444;
+  stroke-width: 2px;
+}
+
+/* Hour markers (not currently used but defined) */
+.hour-line {
+  fill: none;
+  stroke: #4488ff;
+  stroke-width: 2px;
+  stroke-dasharray: 1,10;
+}
+
+/* Additional styles for better dark theme */
+.polar-plot-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: radial-gradient(circle, #1a1f3a 0%, #0a0e1a 100%);
+}
+
+.app-header {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #1e2a4a 0%, #0f1419 100%);
+  border-bottom: 1px solid #333;
+}
+
+.app-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.app-subtitle {
+  font-size: 1.1rem;
+  color: #cccccc;
+  opacity: 0.8;
+}
