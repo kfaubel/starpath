@@ -14,3 +14,18 @@ To run the code, simply open `index.html` in a web browser. No additional setup 
 ## Dependencies
 - D3.js library (included via CDN in `index.html`)
 - A modern web browser to view the visualization.
+
+## Deployment
+- Run: npm install gh-pages --save-dev
+- Add to package.json:
+  "homepage": "http://<your-github-username>.github.io/<repository-name>",
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  }
+- Update vite.config.js to set build.outDir to 'build'
+- Run: npm run deploy
+- Ensure GitHub Pages is enabled in the repository settings, pointing to the 'gh-pages' branch.
+- Ensure the repository is public.
+- Visit: http://<your-github-username>.github.io/<repository-name>
+

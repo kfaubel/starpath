@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react()],
   base: './', // For GitHub Pages deployment
   build: {
-    outDir: 'dist',
+    outDir: 'build',
   },
 })
