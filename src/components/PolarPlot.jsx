@@ -141,9 +141,15 @@ const PolarPlot = ({
         const endPoint = positionData[positionData.length - 1]; // Last point in the time range
         
         if (startPoint && endPoint) {
-            // Convert coordinates for label positioning
-            const startCoords = math2map(startPoint.az, startPoint.el);
-            const endCoords = math2map(endPoint.az, endPoint.el);
+            // Convert coordinates for label positioning using proper polar coordinate conversion
+            const startCoords = {
+                x: r(startPoint.el) * Math.cos(startPoint.az * RADPERDEG - Math.PI/2),
+                y: r(startPoint.el) * Math.sin(startPoint.az * RADPERDEG - Math.PI/2)
+            };
+            const endCoords = {
+                x: r(endPoint.el) * Math.cos(endPoint.az * RADPERDEG - Math.PI/2),
+                y: r(endPoint.el) * Math.sin(endPoint.az * RADPERDEG - Math.PI/2)
+            };
             
             // Format time labels
             const formatTime = (hour) => {
@@ -219,7 +225,10 @@ const PolarPlot = ({
 
     // Draw Polaris (the North Star) as a 5-pointed star
     if (polarisPosition && polarisPosition.el >= 0) { // Only draw if above horizon
-        const polarisCoords = math2map(polarisPosition.az, polarisPosition.el);
+        const polarisCoords = {
+            x: r(polarisPosition.el) * Math.cos(polarisPosition.az * RADPERDEG - Math.PI/2),
+            y: r(polarisPosition.el) * Math.sin(polarisPosition.az * RADPERDEG - Math.PI/2)
+        };
         
         // Function to create 5-pointed star path
         const createStarPath = (cx, cy, size) => {
