@@ -309,7 +309,7 @@ function App() {
             <header className="app-header">
                 <h1 className="app-title">Starpath</h1>
                 <p className="app-subtitle">
-                    Visualizing the path celestial object paths across the night sky<br />
+                    Visualizing the path of celestial objects across the night sky<br />
                 </p>
             </header>
 
@@ -333,11 +333,10 @@ function App() {
                         border: '2px solid rgba(68, 85, 119, 0.6)',
                         flex: '1'
                     }}>
-                        <h2 style={{ margin: '0 0 1.5rem 0', color: '#ffdd44', fontSize: '1.5rem', textAlign: 'center' }}>Astronomical Object</h2>
-
+                        
                         {/* Combined SIMBAD Search and Coordinates */}
                         <div style={{ background: 'rgba(68, 85, 119, 0.4)', padding: '1.5rem', borderRadius: '8px' }}>
-                            <h3 style={{ margin: '0 0 1.5rem 0', color: '#ffffff' }}>SIMBAD Search & Coordinates</h3>
+                            <h3 style={{ margin: '0 0 1.5rem 0', color: '#ffdd44' }}>SIMBAD Search & Coordinates</h3>
 
                             {/* SIMBAD Search */}
                             <div style={{ marginBottom: '1.5rem' }}>
@@ -425,8 +424,15 @@ function App() {
                             )}
                         </div>
 
-                        
-                        <div style={{ background: 'rgba(68, 85, 119, 0.4)', padding: '1rem', borderRadius: '8px' }}>
+                        <div style={{
+                            padding: '2rem',
+                            background: 'rgba(30, 42, 74, 0.8)',
+                            borderBottom: '1px solid #333',
+                            display: 'flex',
+                            flexDirection: 'row',
+                            gap: '2rem',
+                            alignItems: 'flex-start'
+                        }}>
                             {/* Right Ascension Input */}
                             <div>
                                 <h4 style={{ margin: '0 0 0.5rem 0', color: '#ffdd44', fontSize: '1rem' }}>Right Ascension (RA)</h4>
@@ -573,121 +579,216 @@ function App() {
                         border: '2px solid rgba(68, 85, 119, 0.6)',
                         flex: '1'
                     }}>
-                        <h2 style={{ margin: '0 0 1.5rem 0', color: '#ffdd44', fontSize: '1.5rem', textAlign: 'center' }}>Observer Settings</h2>
-
                         {/* Combined Observer Settings */}
-                        <div style={{ background: 'rgba(68, 85, 119, 0.4)', padding: '1.5rem', borderRadius: '8px' }}>
+                        <div style={{ background: 'rgba(68, 85, 119, 0.4)', padding: '1rem', borderRadius: '8px' }}>
 
                             {/* Observer Location */}
-                            <div style={{ marginBottom: '1.5rem' }}>
-                                <h3 style={{ margin: '0 0 1rem 0', color: '#ffffff' }}>Observer Location</h3>
+                            <div style={{ marginBottom: '1rem' }}>
+                                <h3 style={{ margin: '0 0 1rem 0', color: '#ffdd44' }}>Observer Location and Date</h3>
                             </div>
                         </div>
+                        <div style={{
+                            padding: '2rem',
+                            background: 'rgba(30, 42, 74, 0.8)',
+                            borderBottom: '1px solid #333',
+                            display: 'flex',
+                            flexDirection: 'row',
+                            gap: '2rem',
+                            alignItems: 'flex-start'
+                        }}>
+                            <div> 
 
-                        {/* Latitude Input */}
-                        <div style={{ marginBottom: '1rem' }}>
-                            <h4 style={{ margin: '0 0 0.5rem 0', color: '#ffdd44', fontSize: '1rem' }}>Latitude</h4>
-                            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'end' }}>
-                                <div>
-                                    <label style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc', fontSize: '0.9rem' }}>
-                                        Degrees
-                                    </label>
-                                    <input
-                                        type="number"
-                                        min="0"
-                                        max="90"
-                                        value={latDegrees}
-                                        onChange={handleLatDegreesChange}
-                                        style={{
-                                            width: '80px',
-                                            padding: '0.5rem',
-                                            borderRadius: '4px',
-                                            border: '1px solid #555',
-                                            background: '#2a3a5a',
-                                            color: '#ffffff'
-                                        }}
-                                    />
+                                {/* Latitude Input */}
+                                <div style={{ marginBottom: '1rem' }}>
+                                    <h4 style={{ margin: '0 0 0.5rem 0', color: '#ffdd44', fontSize: '1rem' }}>Latitude</h4>
+                                    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'end' }}>
+                                        <div>
+                                            <label style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc', fontSize: '0.9rem' }}>
+                                                Degrees
+                                            </label>
+                                            <input
+                                                type="number"
+                                                min="0"
+                                                max="90"
+                                                value={latDegrees}
+                                                onChange={handleLatDegreesChange}
+                                                style={{
+                                                    width: '80px',
+                                                    padding: '0.5rem',
+                                                    borderRadius: '4px',
+                                                    border: '1px solid #555',
+                                                    background: '#2a3a5a',
+                                                    color: '#ffffff'
+                                                }}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc', fontSize: '0.9rem' }}>
+                                                Arcmin
+                                            </label>
+                                            <input
+                                                type="number"
+                                                min="0"
+                                                max="59"
+                                                value={latArcminutes}
+                                                onChange={handleLatArcminutesChange}
+                                                style={{
+                                                    width: '80px',
+                                                    padding: '0.5rem',
+                                                    borderRadius: '4px',
+                                                    border: '1px solid #555',
+                                                    background: '#2a3a5a',
+                                                    color: '#ffffff'
+                                                }}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc', fontSize: '0.9rem' }}>
+                                                Arcsec
+                                            </label>
+                                            <input
+                                                type="number"
+                                                min="0"
+                                                max="59.99"
+                                                step="0.01"
+                                                value={latArcseconds}
+                                                onChange={handleLatArcsecondsChange}
+                                                style={{
+                                                    width: '80px',
+                                                    padding: '0.5rem',
+                                                    borderRadius: '4px',
+                                                    border: '1px solid #555',
+                                                    background: '#2a3a5a',
+                                                    color: '#ffffff'
+                                                }}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc', fontSize: '0.9rem' }}>
+                                                Direction
+                                            </label>
+                                            <select
+                                                value={latDirection}
+                                                onChange={(e) => setLatDirection(e.target.value)}
+                                                style={{
+                                                    width: '60px',
+                                                    padding: '0.5rem',
+                                                    borderRadius: '4px',
+                                                    border: '1px solid #555',
+                                                    background: '#2a3a5a',
+                                                    color: '#ffffff'
+                                                }}
+                                            >
+                                                <option value="N">N</option>
+                                                <option value="S">S</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
+
+                                {/* Longitude Input */}
                                 <div>
-                                    <label style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc', fontSize: '0.9rem' }}>
-                                        Arcmin
-                                    </label>
-                                    <input
-                                        type="number"
-                                        min="0"
-                                        max="59"
-                                        value={latArcminutes}
-                                        onChange={handleLatArcminutesChange}
-                                        style={{
-                                            width: '80px',
-                                            padding: '0.5rem',
-                                            borderRadius: '4px',
-                                            border: '1px solid #555',
-                                            background: '#2a3a5a',
-                                            color: '#ffffff'
-                                        }}
-                                    />
-                                </div>
-                                <div>
-                                    <label style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc', fontSize: '0.9rem' }}>
-                                        Arcsec
-                                    </label>
-                                    <input
-                                        type="number"
-                                        min="0"
-                                        max="59.99"
-                                        step="0.01"
-                                        value={latArcseconds}
-                                        onChange={handleLatArcsecondsChange}
-                                        style={{
-                                            width: '80px',
-                                            padding: '0.5rem',
-                                            borderRadius: '4px',
-                                            border: '1px solid #555',
-                                            background: '#2a3a5a',
-                                            color: '#ffffff'
-                                        }}
-                                    />
-                                </div>
-                                <div>
-                                    <label style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc', fontSize: '0.9rem' }}>
-                                        Direction
-                                    </label>
-                                    <select
-                                        value={latDirection}
-                                        onChange={(e) => setLatDirection(e.target.value)}
-                                        style={{
-                                            width: '60px',
-                                            padding: '0.5rem',
-                                            borderRadius: '4px',
-                                            border: '1px solid #555',
-                                            background: '#2a3a5a',
-                                            color: '#ffffff'
-                                        }}
-                                    >
-                                        <option value="N">N</option>
-                                        <option value="S">S</option>
-                                    </select>
+                                    <h4 style={{ margin: '0 0 0.5rem 0', color: '#ffdd44', fontSize: '1rem' }}>Longitude</h4>
+                                    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'end' }}>
+                                        <div>
+                                            <label style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc', fontSize: '0.9rem' }}>
+                                                Degrees
+                                            </label>
+                                            <input
+                                                type="number"
+                                                min="0"
+                                                max="180"
+                                                value={lonDegrees}
+                                                onChange={handleLonDegreesChange}
+                                                style={{
+                                                    width: '80px',
+                                                    padding: '0.5rem',
+                                                    borderRadius: '4px',
+                                                    border: '1px solid #555',
+                                                    background: '#2a3a5a',
+                                                    color: '#ffffff'
+                                                }}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc', fontSize: '0.9rem' }}>
+                                                Arcmin
+                                            </label>
+                                            <input
+                                                type="number"
+                                                min="0"
+                                                max="59"
+                                                value={lonArcminutes}
+                                                onChange={handleLonArcminutesChange}
+                                                style={{
+                                                    width: '80px',
+                                                    padding: '0.5rem',
+                                                    borderRadius: '4px',
+                                                    border: '1px solid #555',
+                                                    background: '#2a3a5a',
+                                                    color: '#ffffff'
+                                                }}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc', fontSize: '0.9rem' }}>
+                                                Arcsec
+                                            </label>
+                                            <input
+                                                type="number"
+                                                min="0"
+                                                max="59.99"
+                                                step="0.01"
+                                                value={lonArcseconds}
+                                                onChange={handleLonArcsecondsChange}
+                                                style={{
+                                                    width: '80px',
+                                                    padding: '0.5rem',
+                                                    borderRadius: '4px',
+                                                    border: '1px solid #555',
+                                                    background: '#2a3a5a',
+                                                    color: '#ffffff'
+                                                }}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc', fontSize: '0.9rem' }}>
+                                                Direction
+                                            </label>
+                                            <select
+                                                value={lonDirection}
+                                                onChange={(e) => setLonDirection(e.target.value)}
+                                                style={{
+                                                    width: '60px',
+                                                    padding: '0.5rem',
+                                                    borderRadius: '4px',
+                                                    border: '1px solid #555',
+                                                    background: '#2a3a5a',
+                                                    color: '#ffffff'
+                                                }}
+                                            >
+                                                <option value="E">E</option>
+                                                <option value="W">W</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <div>
 
-                        {/* Longitude Input */}
-                        <div>
-                            <h4 style={{ margin: '0 0 0.5rem 0', color: '#ffdd44', fontSize: '1rem' }}>Longitude</h4>
-                            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'end' }}>
-                                <div>
-                                    <label style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc', fontSize: '0.9rem' }}>
-                                        Degrees
+                                {/* Observation Date */}
+                                <div style={{ marginBottom: '1rem' }}>
+                                    <h4 style={{ margin: '0 0 0.5rem 0', color: '#ffdd44', fontSize: '1rem' }}>Observation Date</h4>
+                                    <label htmlFor="date-input" style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc' }}>
+                                        Date:
                                     </label>
                                     <input
-                                        type="number"
-                                        min="0"
-                                        max="180"
-                                        value={lonDegrees}
-                                        onChange={handleLonDegreesChange}
+                                        id="date-input"
+                                        type="date"
+                                        value={formatDateForInput(observationDate)}
+                                        onChange={handleDateChange}
                                         style={{
-                                            width: '80px',
+                                            width: '100%',
                                             padding: '0.5rem',
                                             borderRadius: '4px',
                                             border: '1px solid #555',
@@ -696,152 +797,69 @@ function App() {
                                         }}
                                     />
                                 </div>
-                                <div>
-                                    <label style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc', fontSize: '0.9rem' }}>
-                                        Arcmin
-                                    </label>
-                                    <input
-                                        type="number"
-                                        min="0"
-                                        max="59"
-                                        value={lonArcminutes}
-                                        onChange={handleLonArcminutesChange}
-                                        style={{
-                                            width: '80px',
-                                            padding: '0.5rem',
-                                            borderRadius: '4px',
-                                            border: '1px solid #555',
-                                            background: '#2a3a5a',
-                                            color: '#ffffff'
-                                        }}
-                                    />
-                                </div>
-                                <div>
-                                    <label style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc', fontSize: '0.9rem' }}>
-                                        Arcsec
-                                    </label>
-                                    <input
-                                        type="number"
-                                        min="0"
-                                        max="59.99"
-                                        step="0.01"
-                                        value={lonArcseconds}
-                                        onChange={handleLonArcsecondsChange}
-                                        style={{
-                                            width: '80px',
-                                            padding: '0.5rem',
-                                            borderRadius: '4px',
-                                            border: '1px solid #555',
-                                            background: '#2a3a5a',
-                                            color: '#ffffff'
-                                        }}
-                                    />
-                                </div>
-                                <div>
-                                    <label style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc', fontSize: '0.9rem' }}>
-                                        Direction
-                                    </label>
-                                    <select
-                                        value={lonDirection}
-                                        onChange={(e) => setLonDirection(e.target.value)}
-                                        style={{
-                                            width: '60px',
-                                            padding: '0.5rem',
-                                            borderRadius: '4px',
-                                            border: '1px solid #555',
-                                            background: '#2a3a5a',
-                                            color: '#ffffff'
-                                        }}
-                                    >
-                                        <option value="E">E</option>
-                                        <option value="W">W</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
 
-                        {/* Observation Date */}
-                        <div style={{ marginBottom: '1.5rem' }}>
-                            <h3 style={{ margin: '0 0 1rem 0', color: '#ffffff' }}>Observation Date</h3>
-                            <label htmlFor="date-input" style={{ display: 'block', marginBottom: '0.5rem', color: '#cccccc' }}>
-                                Date:
-                            </label>
-                            <input
-                                id="date-input"
-                                type="date"
-                                value={formatDateForInput(observationDate)}
-                                onChange={handleDateChange}
-                                style={{
-                                    width: '100%',
-                                    padding: '0.5rem',
-                                    borderRadius: '4px',
-                                    border: '1px solid #555',
-                                    background: '#2a3a5a',
-                                    color: '#ffffff'
-                                }}
-                            />
-                        </div>
-
-                        {/* Time Range */}
-                        <div>
-                            <h3 style={{ margin: '0 0 1rem 0', color: '#ffffff' }}>Observation Time Range</h3>
-                            <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+                                {/* Time Range */}
                                 <div>
-                                    <label style={{ display: 'block', marginBottom: '0.5rem', color: '#cccccc', fontSize: '0.9rem' }}>
-                                        Start Time
-                                    </label>
-                                    <select
-                                        value={startTime}
-                                        onChange={handleStartTimeChange}
-                                        style={{
-                                            width: '120px',
-                                            padding: '0.5rem',
-                                            borderRadius: '4px',
-                                            border: '1px solid #555',
-                                            background: '#2a3a5a',
-                                            color: '#ffffff'
-                                        }}
-                                    >
-                                        {Array.from({ length: 24 }, (_, i) => (
-                                            <option key={i} value={i}>
-                                                {i === 0 ? '12 AM' :
-                                                    i < 12 ? i + ' AM' :
-                                                        i === 12 ? '12 PM' :
-                                                            (i - 12) + ' PM'} ({i.toString().padStart(2, '0')}:00)
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
+                                    <h4 style={{ margin: '0 0 0.5rem 0', color: '#ffdd44', fontSize: '1rem' }}>Time Range</h4>
+                                    <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+                                        <div>
+                                            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#cccccc', fontSize: '0.9rem' }}>
+                                                Start Time
+                                            </label>
+                                            <select
+                                                value={startTime}
+                                                onChange={handleStartTimeChange}
+                                                style={{
+                                                    width: '120px',
+                                                    padding: '0.5rem',
+                                                    borderRadius: '4px',
+                                                    border: '1px solid #555',
+                                                    background: '#2a3a5a',
+                                                    color: '#ffffff'
+                                                }}
+                                            >
+                                                {Array.from({ length: 24 }, (_, i) => (
+                                                    <option key={i} value={i}>
+                                                        {i === 0 ? '12 AM' :
+                                                            i < 12 ? i + ' AM' :
+                                                                i === 12 ? '12 PM' :
+                                                                    (i - 12) + ' PM'} ({i.toString().padStart(2, '0')}:00)
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
 
-                                <div style={{ color: '#ffdd44', fontSize: '1.2rem', fontWeight: 'bold' }}>
-                                    to
-                                </div>
+                                        <div style={{ color: '#ffdd44', fontSize: '1.2rem', fontWeight: 'bold' }}>
+                                            to
+                                        </div>
 
-                                <div>
-                                    <label style={{ display: 'block', marginBottom: '0.5rem', color: '#cccccc', fontSize: '0.9rem' }}>
-                                        End Time
-                                    </label>
-                                    <select
-                                        value={endTime}
-                                        onChange={handleEndTimeChange}
-                                        style={{
-                                            width: '120px',
-                                            padding: '0.5rem',
-                                            borderRadius: '4px',
-                                            border: '1px solid #555',
-                                            background: '#2a3a5a',
-                                            color: '#ffffff'
-                                        }}
-                                    >
-                                        {Array.from({ length: 24 }, (_, i) => (
-                                            <option key={i} value={i}>
-                                                {i === 0 ? '12 AM' :
-                                                    i < 12 ? i + ' AM' :
-                                                        i === 12 ? '12 PM' :
-                                                            (i - 12) + ' PM'} ({i.toString().padStart(2, '0')}:00)
-                                            </option>
-                                        ))}
-                                    </select>
+                                        <div>
+                                            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#cccccc', fontSize: '0.9rem' }}>
+                                                End Time
+                                            </label>
+                                            <select
+                                                value={endTime}
+                                                onChange={handleEndTimeChange}
+                                                style={{
+                                                    width: '120px',
+                                                    padding: '0.5rem',
+                                                    borderRadius: '4px',
+                                                    border: '1px solid #555',
+                                                    background: '#2a3a5a',
+                                                    color: '#ffffff'
+                                                }}
+                                            >
+                                                {Array.from({ length: 24 }, (_, i) => (
+                                                    <option key={i} value={i}>
+                                                        {i === 0 ? '12 AM' :
+                                                            i < 12 ? i + ' AM' :
+                                                                i === 12 ? '12 PM' :
+                                                                    (i - 12) + ' PM'} ({i.toString().padStart(2, '0')}:00)
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
