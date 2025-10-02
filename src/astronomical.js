@@ -164,22 +164,29 @@ export const generateNighttimeDates = (startDate) => {
 export const generateCustomTimeDates = (startDate, startHour, endHour) => {
     const dates = [];
     
+    // Helper function to create a date with a specific hour
+    const createDateWithHour = (baseDate, hour) => {
+        const newDate = new Date(baseDate);
+        newDate.setHours(hour, 0, 0, 0); // Set hour, reset minutes/seconds/ms to 0
+        return newDate;
+    };
+    
     if (startHour <= endHour) {
         // Same day range (e.g., 8 AM to 6 PM)
         for (let h = startHour; h <= endHour; h++) {
-            dates.push(addTime(h, startDate, 'setHours', 'getHours'));
+            dates.push(createDateWithHour(startDate, h));
         }
     } else {
-        // Cross-midnight range (e.g., 6 PM to 6 AM)
+        // Cross-midnight range (e.g., 7 PM to 4 AM)
         // Generate hours from start to end of day
         for (let h = startHour; h < 24; h++) {
-            dates.push(addTime(h, startDate, 'setHours', 'getHours'));
+            dates.push(createDateWithHour(startDate, h));
         }
         // Generate hours from start of next day to end hour
         const nextDay = new Date(startDate);
         nextDay.setDate(nextDay.getDate() + 1);
         for (let h = 0; h <= endHour; h++) {
-            dates.push(addTime(h, nextDay, 'setHours', 'getHours'));
+            dates.push(createDateWithHour(nextDay, h));
         }
     }
     return dates;
