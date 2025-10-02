@@ -10,6 +10,7 @@ Shows the paths of celestial objects across the sky over time
 
 const PolarPlot = ({ 
   positionData, 
+  polarisPosition,
   width = 1024, 
   height = 640, 
   className = '' 
@@ -134,9 +135,134 @@ const PolarPlot = ({
             .style("fill", "none")
             .style("stroke", "#ff4444")
             .style("stroke-width", "2px");
+
+        // Find the start and end time data points
+        const startPoint = positionData[0]; // First point in the time range
+        const endPoint = positionData[positionData.length - 1]; // Last point in the time range
+        
+        if (startPoint && endPoint) {
+            // Convert coordinates for label positioning
+            const startCoords = math2map(startPoint.az, startPoint.el);
+            const endCoords = math2map(endPoint.az, endPoint.el);
+            
+            // Format time labels
+            const formatTime = (hour) => {
+              if (hour === 0) return "12 AM";
+              if (hour < 12) return hour + " AM";
+              if (hour === 12) return "12 PM";
+              return (hour - 12) + " PM";
+            };
+            
+            // Enhanced start time label - positioned at actual start coordinates
+            g.append("circle")
+                .attr("cx", startCoords.x)
+                .attr("cy", startCoords.y)
+                .attr("r", 6)
+                .style("fill", "#ff4444")
+                .style("stroke", "#ffffff")
+                .style("stroke-width", "2px");
+                
+            // Background for text (makes it more readable)
+            const startLabel = formatTime(startPoint.time);
+            const startLabelWidth = startLabel.length * 8 + 10;
+            g.append("rect")
+                .attr("x", startCoords.x - startLabelWidth/2)
+                .attr("y", startCoords.y - 25)
+                .attr("width", startLabelWidth)
+                .attr("height", 16)
+                .attr("rx", 3)
+                .style("fill", "rgba(0, 0, 0, 0.8)")
+                .style("stroke", "#ff4444")
+                .style("stroke-width", "1px");
+                
+            g.append("text")
+                .attr("x", startCoords.x)
+                .attr("y", startCoords.y - 12)
+                .attr("text-anchor", "middle")
+                .style("fill", "#ffffff")
+                .style("font-size", "14px")
+                .style("font-weight", "bold")
+                .text(startLabel);
+                
+            // Enhanced end time label - positioned at actual end coordinates
+            g.append("circle")
+                .attr("cx", endCoords.x)
+                .attr("cy", endCoords.y)
+                .attr("r", 6)
+                .style("fill", "#ff4444")
+                .style("stroke", "#ffffff")
+                .style("stroke-width", "2px");
+                
+            // Background for text (makes it more readable)
+            const endLabel = formatTime(endPoint.time);
+            const endLabelWidth = endLabel.length * 8 + 10;
+            g.append("rect")
+                .attr("x", endCoords.x - endLabelWidth/2)
+                .attr("y", endCoords.y - 25)
+                .attr("width", endLabelWidth)
+                .attr("height", 16)
+                .attr("rx", 3)
+                .style("fill", "rgba(0, 0, 0, 0.8)")
+                .style("stroke", "#ff4444")
+                .style("stroke-width", "1px");
+                
+            g.append("text")
+                .attr("x", endCoords.x)
+                .attr("y", endCoords.y - 12)
+                .attr("text-anchor", "middle")
+                .style("fill", "#ffffff")
+                .style("font-size", "14px")
+                .style("font-weight", "bold")
+                .text(endLabel);
+        }
     }
 
-  }, [positionData, width, height]);
+    // Draw Polaris (the North Star) as a 5-pointed star
+    if (polarisPosition && polarisPosition.el >= 0) { // Only draw if above horizon
+        const polarisCoords = math2map(polarisPosition.az, polarisPosition.el);
+        
+        // Function to create 5-pointed star path
+        const createStarPath = (cx, cy, size) => {
+            const outerRadius = size;
+            const innerRadius = size * 0.4;
+            let path = '';
+            
+            for (let i = 0; i < 10; i++) {
+                const angle = (i * Math.PI) / 5 - Math.PI / 2; // Start from top
+                const radius = i % 2 === 0 ? outerRadius : innerRadius;
+                const x = cx + Math.cos(angle) * radius;
+                const y = cy + Math.sin(angle) * radius;
+                
+                if (i === 0) {
+                    path += `M ${x} ${y}`;
+                } else {
+                    path += ` L ${x} ${y}`;
+                }
+            }
+            path += ' Z'; // Close the path
+            return path;
+        };
+        
+        // Draw the 5-pointed star for Polaris
+        g.append("path")
+            .attr("d", createStarPath(polarisCoords.x, polarisCoords.y, 8))
+            .style("fill", "#ffdd44")
+            .style("stroke", "#ffffff")
+            .style("stroke-width", "1px");
+            
+        // Add Polaris label
+        g.append("text")
+            .attr("x", polarisCoords.x)
+            .attr("y", polarisCoords.y + 20)
+            .attr("text-anchor", "middle")
+            .style("fill", "#ffdd44")
+            .style("font-size", "12px")
+            .style("font-weight", "bold")
+            .style("text-shadow", "1px 1px 2px rgba(0,0,0,0.8)")
+            .text("POLARIS");
+    }
+
+  }, [positionData, polarisPosition, width, height]);
 
   return (
     <div className={`polar-plot ${className}`}>

@@ -100,6 +100,13 @@ export const fireworksCelestial = {
   dec : dmsToDeg(60, 14, 47)       // Declination: +60° 14' 47" 
 };
 
+// Polaris (the North Star) - α Ursae Minoris
+// Located very close to the North Celestial Pole, appears nearly stationary
+export const polarisCelestial = {
+  ra : hmsToDeg(2, 31, 49),        // Right Ascension: 2h 31m 49s
+  dec : dmsToDeg(89, 15, 51)       // Declination: +89° 15' 51" (very close to +90°)
+};
+
 // Observer location: Dunstable, Massachusetts, USA
 export const dunstableMAUsaLatLong = {
   lat : dmsToDeg(42, 41, 1),       // Latitude: 42° 41' 1" N
@@ -137,14 +144,79 @@ export const generateHourlyDates = (startDate) => {
     return dates;
 };
 
+// Generate array of Date objects for nighttime hours only (6 PM to 6 AM)
+export const generateNighttimeDates = (startDate) => {
+    const dates = [];
+    // Generate hours from 18:00 (6 PM) to 23:59 (11:59 PM)
+    for (let h = 18; h < 24; h++) {
+        dates.push(addTime(h, startDate, 'setHours', 'getHours'));
+    }
+    // Generate hours from 00:00 (midnight) to 05:59 (5:59 AM)
+    const nextDay = new Date(startDate);
+    nextDay.setDate(nextDay.getDate() + 1);
+    for (let h = 0; h < 6; h++) {
+        dates.push(addTime(h, nextDay, 'setHours', 'getHours'));
+    }
+    return dates;
+};
+
+// Generate array of Date objects for custom time range
+export const generateCustomTimeDates = (startDate, startHour, endHour) => {
+    const dates = [];
+    
+    if (startHour <= endHour) {
+        // Same day range (e.g., 8 AM to 6 PM)
+        for (let h = startHour; h <= endHour; h++) {
+            dates.push(addTime(h, startDate, 'setHours', 'getHours'));
+        }
+    } else {
+        // Cross-midnight range (e.g., 6 PM to 6 AM)
+        // Generate hours from start to end of day
+        for (let h = startHour; h < 24; h++) {
+            dates.push(addTime(h, startDate, 'setHours', 'getHours'));
+        }
+        // Generate hours from start of next day to end hour
+        const nextDay = new Date(startDate);
+        nextDay.setDate(nextDay.getDate() + 1);
+        for (let h = 0; h <= endHour; h++) {
+            dates.push(addTime(h, nextDay, 'setHours', 'getHours'));
+        }
+    }
+    return dates;
+};
+
 // Generate position data for celestial objects over time
 export const generatePositionData = (celestialObject, startDate = new Date()) => {
     const dateVec = generateHourlyDates(startDate);
     return dateVec.map(date => calculatePositionAtTime(date, celestialObject));
 };
 
+// Generate position data for celestial objects during nighttime hours only (6 PM to 6 AM)
+export const generateNighttimePositionData = (celestialObject, startDate = new Date()) => {
+    const dateVec = generateNighttimeDates(startDate);
+    return dateVec.map(date => ({
+        ...calculatePositionAtTime(date, celestialObject),
+        time: date.getHours() // Store the hour for labeling
+    }));
+};
+
+// Generate position data for celestial objects during custom time range
+export const generateCustomTimePositionData = (celestialObject, startDate = new Date(), startHour = 18, endHour = 6) => {
+    const dateVec = generateCustomTimeDates(startDate, startHour, endHour);
+    return dateVec.map(date => ({
+        ...calculatePositionAtTime(date, celestialObject),
+        time: date.getHours() // Store the hour for labeling
+    }));
+};
+
 // Pre-calculated position vectors for common objects
 export const getPositionVectors = (startDate = new Date()) => ({
     fireworks: generatePositionData(fireworksCelestial, startDate),
     sol: generatePositionData(solCelestial, startDate)
+});
+
+// Pre-calculated position vectors for nighttime hours only (6 PM to 6 AM)
+export const getNighttimePositionVectors = (startDate = new Date()) => ({
+    fireworks: generateNighttimePositionData(fireworksCelestial, startDate),
+    sol: generateNighttimePositionData(solCelestial, startDate)
 });
