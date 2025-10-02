@@ -337,13 +337,11 @@ function App() {
 
                         {/* Combined SIMBAD Search and Coordinates */}
                         <div style={{ background: 'rgba(68, 85, 119, 0.4)', padding: '1.5rem', borderRadius: '8px' }}>
-                            <h3 style={{ margin: '0 0 1.5rem 0', color: '#ffffff' }}>Object Search & Coordinates</h3>
+                            <h3 style={{ margin: '0 0 1.5rem 0', color: '#ffffff' }}>SIMBAD Search & Coordinates</h3>
 
                             {/* SIMBAD Search */}
                             <div style={{ marginBottom: '1.5rem' }}>
-                                <label htmlFor="simbad-search" style={{ display: 'block', marginBottom: '0.5rem', color: '#cccccc' }}>
-                                    Search SIMBAD Database:
-                                </label>
+                                
                                 <div style={{ display: 'flex', gap: '0.5rem' }}>
                                     <input
                                         id="simbad-search"
@@ -427,75 +425,76 @@ function App() {
                             )}
                         </div>
 
-
-
-                        {/* Right Ascension Input */}
+                        
                         <div style={{ background: 'rgba(68, 85, 119, 0.4)', padding: '1rem', borderRadius: '8px' }}>
-                            <h4 style={{ margin: '0 0 0.5rem 0', color: '#ffdd44', fontSize: '1rem' }}>Right Ascension (RA)</h4>
-                            <div style={{ display: 'flex', gap: '0.3rem', alignItems: 'end' }}>
-                                <div>
-                                    <label style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc', fontSize: '0.9rem' }}>
-                                        Hours
-                                    </label>
-                                    <input
-                                        type="number"
-                                        min="0"
-                                        max="23"
-                                        value={raHours}
-                                        onChange={handleRaHoursChange}
-                                        style={{
-                                            width: '70px',
-                                            padding: '0.5rem',
-                                            borderRadius: '4px',
-                                            border: '1px solid #555',
-                                            background: '#2a3a5a',
-                                            color: '#ffffff'
-                                        }}
-                                    />
-                                </div>
-                                <div>
-                                    <label style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc', fontSize: '0.9rem' }}>
-                                        Minutes
-                                    </label>
-                                    <input
-                                        type="number"
-                                        min="0"
-                                        max="59"
-                                        value={raMinutes}
-                                        onChange={handleRaMinutesChange}
-                                        style={{
-                                            width: '70px',
-                                            padding: '0.5rem',
-                                            borderRadius: '4px',
-                                            border: '1px solid #555',
-                                            background: '#2a3a5a',
-                                            color: '#ffffff'
-                                        }}
-                                    />
-                                </div>
-                                <div>
-                                    <label style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc', fontSize: '0.9rem' }}>
-                                        Seconds
-                                    </label>
-                                    <input
-                                        type="number"
-                                        min="0"
-                                        max="59.99"
-                                        step="0.01"
-                                        value={raSeconds}
-                                        onChange={handleRaSecondsChange}
-                                        style={{
-                                            width: '80px',
-                                            padding: '0.5rem',
-                                            borderRadius: '4px',
-                                            border: '1px solid #555',
-                                            background: '#2a3a5a',
-                                            color: '#ffffff'
-                                        }}
-                                    />
+                            {/* Right Ascension Input */}
+                            <div>
+                                <h4 style={{ margin: '0 0 0.5rem 0', color: '#ffdd44', fontSize: '1rem' }}>Right Ascension (RA)</h4>
+                                <div style={{ display: 'flex', gap: '0.3rem', alignItems: 'end' }}>
+                                    <div>
+                                        <label style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc', fontSize: '0.9rem' }}>
+                                            Hours
+                                        </label>
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            max="23"
+                                            value={raHours}
+                                            onChange={handleRaHoursChange}
+                                            style={{
+                                                width: '70px',
+                                                padding: '0.5rem',
+                                                borderRadius: '4px',
+                                                border: '1px solid #555',
+                                                background: '#2a3a5a',
+                                                color: '#ffffff'
+                                            }}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc', fontSize: '0.9rem' }}>
+                                            Minutes
+                                        </label>
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            max="59"
+                                            value={raMinutes}
+                                            onChange={handleRaMinutesChange}
+                                            style={{
+                                                width: '70px',
+                                                padding: '0.5rem',
+                                                borderRadius: '4px',
+                                                border: '1px solid #555',
+                                                background: '#2a3a5a',
+                                                color: '#ffffff'
+                                            }}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label style={{ display: 'block', marginBottom: '0.3rem', color: '#cccccc', fontSize: '0.9rem' }}>
+                                            Seconds
+                                        </label>
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            max="59.99"
+                                            step="0.01"
+                                            value={raSeconds}
+                                            onChange={handleRaSecondsChange}
+                                            style={{
+                                                width: '80px',
+                                                padding: '0.5rem',
+                                                borderRadius: '4px',
+                                                border: '1px solid #555',
+                                                background: '#2a3a5a',
+                                                color: '#ffffff'
+                                            }}
+                                        />
+                                    </div>
                                 </div>
                             </div>
-
+                        
                             {/* Declination Input */}
                             <div>
                                 <h4 style={{ margin: '0 0 0.5rem 0', color: '#ffdd44', fontSize: '1rem' }}>Declination (Dec)</h4>
@@ -759,163 +758,160 @@ function App() {
                                     </select>
                                 </div>
                             </div>
+                        </div>
 
-                            {/* Observation Date */}
-                            <div style={{ marginBottom: '1.5rem' }}>
-                                <h3 style={{ margin: '0 0 1rem 0', color: '#ffffff' }}>Observation Date</h3>
-                                <label htmlFor="date-input" style={{ display: 'block', marginBottom: '0.5rem', color: '#cccccc' }}>
-                                    Date:
-                                </label>
-                                <input
-                                    id="date-input"
-                                    type="date"
-                                    value={formatDateForInput(observationDate)}
-                                    onChange={handleDateChange}
-                                    style={{
-                                        width: '100%',
-                                        padding: '0.5rem',
-                                        borderRadius: '4px',
-                                        border: '1px solid #555',
-                                        background: '#2a3a5a',
-                                        color: '#ffffff'
-                                    }}
-                                />
-                            </div>
+                        {/* Observation Date */}
+                        <div style={{ marginBottom: '1.5rem' }}>
+                            <h3 style={{ margin: '0 0 1rem 0', color: '#ffffff' }}>Observation Date</h3>
+                            <label htmlFor="date-input" style={{ display: 'block', marginBottom: '0.5rem', color: '#cccccc' }}>
+                                Date:
+                            </label>
+                            <input
+                                id="date-input"
+                                type="date"
+                                value={formatDateForInput(observationDate)}
+                                onChange={handleDateChange}
+                                style={{
+                                    width: '100%',
+                                    padding: '0.5rem',
+                                    borderRadius: '4px',
+                                    border: '1px solid #555',
+                                    background: '#2a3a5a',
+                                    color: '#ffffff'
+                                }}
+                            />
+                        </div>
 
-                            {/* Time Range */}
-                            <div>
-                                <h3 style={{ margin: '0 0 1rem 0', color: '#ffffff' }}>Observation Time Range</h3>
-                                <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-                                    <div>
-                                        <label style={{ display: 'block', marginBottom: '0.5rem', color: '#cccccc', fontSize: '0.9rem' }}>
-                                            Start Time
-                                        </label>
-                                        <select
-                                            value={startTime}
-                                            onChange={handleStartTimeChange}
-                                            style={{
-                                                width: '120px',
-                                                padding: '0.5rem',
-                                                borderRadius: '4px',
-                                                border: '1px solid #555',
-                                                background: '#2a3a5a',
-                                                color: '#ffffff'
-                                            }}
-                                        >
-                                            {Array.from({ length: 24 }, (_, i) => (
-                                                <option key={i} value={i}>
-                                                    {i === 0 ? '12 AM' :
-                                                        i < 12 ? i + ' AM' :
-                                                            i === 12 ? '12 PM' :
-                                                                (i - 12) + ' PM'} ({i.toString().padStart(2, '0')}:00)
-                                                </option>
-                                            ))}
-                                        </select>
-                                    </div>
-
-                                    <div style={{ color: '#ffdd44', fontSize: '1.2rem', fontWeight: 'bold' }}>
-                                        to
-                                    </div>
-
-                                    <div>
-                                        <label style={{ display: 'block', marginBottom: '0.5rem', color: '#cccccc', fontSize: '0.9rem' }}>
-                                            End Time
-                                        </label>
-                                        <select
-                                            value={endTime}
-                                            onChange={handleEndTimeChange}
-                                            style={{
-                                                width: '120px',
-                                                padding: '0.5rem',
-                                                borderRadius: '4px',
-                                                border: '1px solid #555',
-                                                background: '#2a3a5a',
-                                                color: '#ffffff'
-                                            }}
-                                        >
-                                            {Array.from({ length: 24 }, (_, i) => (
-                                                <option key={i} value={i}>
-                                                    {i === 0 ? '12 AM' :
-                                                        i < 12 ? i + ' AM' :
-                                                            i === 12 ? '12 PM' :
-                                                                (i - 12) + ' PM'} ({i.toString().padStart(2, '0')}:00)
-                                                </option>
-                                            ))}
-                                        </select>
-                                    </div>
+                        {/* Time Range */}
+                        <div>
+                            <h3 style={{ margin: '0 0 1rem 0', color: '#ffffff' }}>Observation Time Range</h3>
+                            <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+                                <div>
+                                    <label style={{ display: 'block', marginBottom: '0.5rem', color: '#cccccc', fontSize: '0.9rem' }}>
+                                        Start Time
+                                    </label>
+                                    <select
+                                        value={startTime}
+                                        onChange={handleStartTimeChange}
+                                        style={{
+                                            width: '120px',
+                                            padding: '0.5rem',
+                                            borderRadius: '4px',
+                                            border: '1px solid #555',
+                                            background: '#2a3a5a',
+                                            color: '#ffffff'
+                                        }}
+                                    >
+                                        {Array.from({ length: 24 }, (_, i) => (
+                                            <option key={i} value={i}>
+                                                {i === 0 ? '12 AM' :
+                                                    i < 12 ? i + ' AM' :
+                                                        i === 12 ? '12 PM' :
+                                                            (i - 12) + ' PM'} ({i.toString().padStart(2, '0')}:00)
+                                            </option>
+                                        ))}
+                                    </select>
                                 </div>
 
-                                <div style={{ marginTop: '0.5rem', fontSize: '0.8rem', color: '#db2121ff', fontStyle: 'italic' }}>
-                                    {startTime > endTime
-                                        ? `Shows path from ${startTime === 0 ? '12 AM' : startTime < 12 ? startTime + ' AM' : startTime === 12 ? '12 PM' : (startTime - 12) + ' PM'} today to ${endTime === 0 ? '12 AM' : endTime < 12 ? endTime + ' AM' : endTime === 12 ? '12 PM' : (endTime - 12) + ' PM'} tomorrow (crosses midnight)`
-                                        : `Shows path from ${startTime === 0 ? '12 AM' : startTime < 12 ? startTime + ' AM' : startTime === 12 ? '12 PM' : (startTime - 12) + ' PM'} to ${endTime === 0 ? '12 AM' : endTime < 12 ? endTime + ' AM' : endTime === 12 ? '12 PM' : (endTime - 12) + ' PM'} (same day)`
-                                    }
+                                <div style={{ color: '#ffdd44', fontSize: '1.2rem', fontWeight: 'bold' }}>
+                                    to
+                                </div>
+
+                                <div>
+                                    <label style={{ display: 'block', marginBottom: '0.5rem', color: '#cccccc', fontSize: '0.9rem' }}>
+                                        End Time
+                                    </label>
+                                    <select
+                                        value={endTime}
+                                        onChange={handleEndTimeChange}
+                                        style={{
+                                            width: '120px',
+                                            padding: '0.5rem',
+                                            borderRadius: '4px',
+                                            border: '1px solid #555',
+                                            background: '#2a3a5a',
+                                            color: '#ffffff'
+                                        }}
+                                    >
+                                        {Array.from({ length: 24 }, (_, i) => (
+                                            <option key={i} value={i}>
+                                                {i === 0 ? '12 AM' :
+                                                    i < 12 ? i + ' AM' :
+                                                        i === 12 ? '12 PM' :
+                                                            (i - 12) + ' PM'} ({i.toString().padStart(2, '0')}:00)
+                                            </option>
+                                        ))}
+                                    </select>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
 
-                            {/* Visualization */}
-                            <div className="polar-plot-container">
-                                {loading ? (
-                                    <div style={{
-                                        color: '#cccccc',
-                                        fontSize: '1.2rem',
-                                        textAlign: 'center'
-                                    }}>
-                                        Calculating celestial positions...
-                                    </div>
-                                ) : currentObjectData ? (
-                                    <PolarPlot
-                                        positionData={currentObjectData}
-                                        polarisPosition={positionData?.polaris}
-                                        width={1024}
-                                        height={640}
-                                    />
-                                ) : (
-                                    <div style={{
-                                        color: '#ff6666',
-                                        fontSize: '1.2rem',
-                                        textAlign: 'center'
-                                    }}>
-                                        Error: Unable to calculate positions
-                                    </div>
-                                )}
-                            </div>
-
-                            {/* Instructions */}
+                {/* VISUALIZATION SECTION */}
+                <div>
+                    {/* Visualization */}
+                    <div className="polar-plot-container">
+                        {loading ? (
                             <div style={{
-                                padding: '2rem',
-                                background: 'rgba(15, 20, 35, 0.8)',
-                                borderTop: '1px solid #333',
+                                color: '#cccccc',
+                                fontSize: '1.2rem',
                                 textAlign: 'center'
                             }}>
-                                <h2 style={{ color: '#ffffff', marginBottom: '1rem' }}>How to Read This Chart</h2>
-                                <div style={{
-                                    display: 'grid',
-                                    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                                    gap: '1.5rem',
-                                    maxWidth: '1200px',
-                                    margin: '0 auto'
-                                }}>
-                                    <div>
-                                        <h3 style={{ color: '#ff4444', marginBottom: '0.5rem' }}>Red Line & Labels</h3>
-                                        <p style={{ color: '#cccccc', margin: 0 }}>
-                                            Shows the path of the celestial object during nighttime hours (6 PM to 6 AM).
-                                            Red dots and labels mark the start (6 PM) and end (6 AM) of the observation period.
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <h3 style={{ color: '#666666', marginBottom: '0.5rem' }}>Circles</h3>
-                                        <p style={{ color: '#cccccc', margin: 0 }}>
-                                            Represent elevation angles: center = 90° (zenith), edge = 0° (horizon)
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <h3 style={{ color: '#888888', marginBottom: '0.5rem' }}>Compass Labels</h3>
-                                        <p style={{ color: '#cccccc', margin: 0 }}>
-                                            Show cardinal and intercardinal directions (N, NE, E, SE, etc.)
-                                        </p>
-                                    </div>
-                                </div>
+                                Calculating celestial positions...
+                            </div>
+                        ) : currentObjectData ? (
+                            <PolarPlot
+                                positionData={currentObjectData}
+                                polarisPosition={positionData?.polaris}
+                                width={1024}
+                                height={640}
+                            />
+                        ) : (
+                            <div style={{
+                                color: '#ff6666',
+                                fontSize: '1.2rem',
+                                textAlign: 'center'
+                            }}>
+                                Error: Unable to calculate positions
+                            </div>
+                        )}
+                    </div>
+                </div>
+                <div>
+                    {/* Instructions */}
+                    <div style={{
+                        padding: '2rem',
+                        background: 'rgba(15, 20, 35, 0.8)',
+                        borderTop: '1px solid #333',
+                        textAlign: 'center'
+                    }}>
+                        <h2 style={{ color: '#ffffff', marginBottom: '1rem' }}>How to Read This Chart</h2>
+                        <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                            gap: '1.5rem',
+                            maxWidth: '1200px',
+                            margin: '0 auto'
+                        }}>
+                            <div>
+                                <h3 style={{ color: '#ff4444', marginBottom: '0.5rem' }}>Red Line & Labels</h3>
+                                <p style={{ color: '#cccccc', margin: 0 }}>
+                                    Shows the path of the celestial object during nighttime hours (6 PM to 6 AM).
+                                    Red dots and labels mark the start (6 PM) and end (6 AM) of the observation period.
+                                </p>
+                            </div>
+                            <div>
+                                <h3 style={{ color: '#666666', marginBottom: '0.5rem' }}>Circles</h3>
+                                <p style={{ color: '#cccccc', margin: 0 }}>
+                                    Represent elevation angles: center = 90° (zenith), edge = 0° (horizon)
+                                </p>
+                            </div>
+                            <div>
+                                <h3 style={{ color: '#888888', marginBottom: '0.5rem' }}>Compass Labels</h3>
+                                <p style={{ color: '#cccccc', margin: 0 }}>
+                                    Show cardinal and intercardinal directions (N, NE, E, SE, etc.)
+                                </p>
                             </div>
                         </div>
                     </div>
