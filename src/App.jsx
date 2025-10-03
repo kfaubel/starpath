@@ -8,32 +8,109 @@ Starpath - Astronomical Sky Path Visualization
 */
 
 function App() {
+    // Local storage utility functions
+    const saveToLocalStorage = (key, value) => {
+        try {
+            localStorage.setItem(key, JSON.stringify(value));
+        } catch (error) {
+            console.warn('Failed to save to localStorage:', error);
+        }
+    };
+
+    const loadFromLocalStorage = (key, defaultValue) => {
+        try {
+            const saved = localStorage.getItem(key);
+            return saved ? JSON.parse(saved) : defaultValue;
+        } catch (error) {
+            console.warn('Failed to load from localStorage:', error);
+            return defaultValue;
+        }
+    };
+
     const [positionData, setPositionData] = useState(null);
     const [observationDate, setObservationDate] = useState(new Date());
     const [loading, setLoading] = useState(true);
 
-    // Celestial coordinates in HMS/DMS format (primary input method)
-    const [raHours, setRaHours] = useState(20);
-    const [raMinutes, setRaMinutes] = useState(35);
-    const [raSeconds, setRaSeconds] = useState(25);
-    const [decDegrees, setDecDegrees] = useState(60);
-    const [decArcminutes, setDecArcminutes] = useState(14);
-    const [decArcseconds, setDecArcseconds] = useState(47);
+    // Celestial coordinates in HMS/DMS format (primary input method) - load from localStorage
+    const [raHours, setRaHours] = useState(() => loadFromLocalStorage('starpath_raHours', 20));
+    const [raMinutes, setRaMinutes] = useState(() => loadFromLocalStorage('starpath_raMinutes', 35));
+    const [raSeconds, setRaSeconds] = useState(() => loadFromLocalStorage('starpath_raSeconds', 25));
+    const [decDegrees, setDecDegrees] = useState(() => loadFromLocalStorage('starpath_decDegrees', 60));
+    const [decArcminutes, setDecArcminutes] = useState(() => loadFromLocalStorage('starpath_decArcminutes', 14));
+    const [decArcseconds, setDecArcseconds] = useState(() => loadFromLocalStorage('starpath_decArcseconds', 47));
     const [objectName, setObjectName] = useState('Fireworks Nebula');
 
-    // Observer coordinates in DMS format (Dunstable, MA by default)
-    const [latDegrees, setLatDegrees] = useState(42);
-    const [latArcminutes, setLatArcminutes] = useState(41);
-    const [latArcseconds, setLatArcseconds] = useState(1);
-    const [latDirection, setLatDirection] = useState('N'); // N or S
-    const [lonDegrees, setLonDegrees] = useState(71);
-    const [lonArcminutes, setLonArcminutes] = useState(28);
-    const [lonArcseconds, setLonArcseconds] = useState(16);
-    const [lonDirection, setLonDirection] = useState('W'); // E or W
+    // Observer coordinates in DMS format (Dunstable, MA by default) - load from localStorage
+    const [latDegrees, setLatDegrees] = useState(() => loadFromLocalStorage('starpath_latDegrees', 42));
+    const [latArcminutes, setLatArcminutes] = useState(() => loadFromLocalStorage('starpath_latArcminutes', 41));
+    const [latArcseconds, setLatArcseconds] = useState(() => loadFromLocalStorage('starpath_latArcseconds', 1));
+    const [latDirection, setLatDirection] = useState(() => loadFromLocalStorage('starpath_latDirection', 'N'));
+    const [lonDegrees, setLonDegrees] = useState(() => loadFromLocalStorage('starpath_lonDegrees', 71));
+    const [lonArcminutes, setLonArcminutes] = useState(() => loadFromLocalStorage('starpath_lonArcminutes', 28));
+    const [lonArcseconds, setLonArcseconds] = useState(() => loadFromLocalStorage('starpath_lonArcseconds', 16));
+    const [lonDirection, setLonDirection] = useState(() => loadFromLocalStorage('starpath_lonDirection', 'W'));
 
     // Time range for starpath (24-hour format)
     const [startTime, setStartTime] = useState(18); // 6 PM default
     const [endTime, setEndTime] = useState(6); // 6 AM default
+
+    // Wrapper functions to save coordinates to localStorage when they change
+    const updateRaHours = (value) => {
+        setRaHours(value);
+        saveToLocalStorage('starpath_raHours', value);
+    };
+    const updateRaMinutes = (value) => {
+        setRaMinutes(value);
+        saveToLocalStorage('starpath_raMinutes', value);
+    };
+    const updateRaSeconds = (value) => {
+        setRaSeconds(value);
+        saveToLocalStorage('starpath_raSeconds', value);
+    };
+    const updateDecDegrees = (value) => {
+        setDecDegrees(value);
+        saveToLocalStorage('starpath_decDegrees', value);
+    };
+    const updateDecArcminutes = (value) => {
+        setDecArcminutes(value);
+        saveToLocalStorage('starpath_decArcminutes', value);
+    };
+    const updateDecArcseconds = (value) => {
+        setDecArcseconds(value);
+        saveToLocalStorage('starpath_decArcseconds', value);
+    };
+    const updateLatDegrees = (value) => {
+        setLatDegrees(value);
+        saveToLocalStorage('starpath_latDegrees', value);
+    };
+    const updateLatArcminutes = (value) => {
+        setLatArcminutes(value);
+        saveToLocalStorage('starpath_latArcminutes', value);
+    };
+    const updateLatArcseconds = (value) => {
+        setLatArcseconds(value);
+        saveToLocalStorage('starpath_latArcseconds', value);
+    };
+    const updateLatDirection = (value) => {
+        setLatDirection(value);
+        saveToLocalStorage('starpath_latDirection', value);
+    };
+    const updateLonDegrees = (value) => {
+        setLonDegrees(value);
+        saveToLocalStorage('starpath_lonDegrees', value);
+    };
+    const updateLonArcminutes = (value) => {
+        setLonArcminutes(value);
+        saveToLocalStorage('starpath_lonArcminutes', value);
+    };
+    const updateLonArcseconds = (value) => {
+        setLonArcseconds(value);
+        saveToLocalStorage('starpath_lonArcseconds', value);
+    };
+    const updateLonDirection = (value) => {
+        setLonDirection(value);
+        saveToLocalStorage('starpath_lonDirection', value);
+    };
 
     // SIMBAD search state
     const [searchQuery, setSearchQuery] = useState('');
@@ -104,21 +181,21 @@ function App() {
     const handleRaHoursChange = (e) => {
         const value = parseInt(e.target.value);
         if (!isNaN(value) && value >= 0 && value <= 23) {
-            setRaHours(value);
+            updateRaHours(value);
         }
     };
 
     const handleRaMinutesChange = (e) => {
         const value = parseInt(e.target.value);
         if (!isNaN(value) && value >= 0 && value <= 59) {
-            setRaMinutes(value);
+            updateRaMinutes(value);
         }
     };
 
     const handleRaSecondsChange = (e) => {
         const value = parseFloat(e.target.value);
         if (!isNaN(value) && value >= 0 && value < 60) {
-            setRaSeconds(value);
+            updateRaSeconds(value);
         }
     };
 
@@ -126,21 +203,21 @@ function App() {
     const handleDecDegreesChange = (e) => {
         const value = parseInt(e.target.value);
         if (!isNaN(value) && value >= -90 && value <= 90) {
-            setDecDegrees(value);
+            updateDecDegrees(value);
         }
     };
 
     const handleDecArcminutesChange = (e) => {
         const value = parseInt(e.target.value);
         if (!isNaN(value) && value >= 0 && value <= 59) {
-            setDecArcminutes(value);
+            updateDecArcminutes(value);
         }
     };
 
     const handleDecArcsecondsChange = (e) => {
         const value = parseFloat(e.target.value);
         if (!isNaN(value) && value >= 0 && value < 60) {
-            setDecArcseconds(value);
+            updateDecArcseconds(value);
         }
     };
 
@@ -148,42 +225,42 @@ function App() {
     const handleLatDegreesChange = (e) => {
         const value = parseInt(e.target.value);
         if (!isNaN(value) && value >= 0 && value <= 90) {
-            setLatDegrees(value);
+            updateLatDegrees(value);
         }
     };
 
     const handleLatArcminutesChange = (e) => {
         const value = parseInt(e.target.value);
         if (!isNaN(value) && value >= 0 && value <= 59) {
-            setLatArcminutes(value);
+            updateLatArcminutes(value);
         }
     };
 
     const handleLatArcsecondsChange = (e) => {
         const value = parseFloat(e.target.value);
         if (!isNaN(value) && value >= 0 && value < 60) {
-            setLatArcseconds(value);
+            updateLatArcseconds(value);
         }
     };
 
     const handleLonDegreesChange = (e) => {
         const value = parseInt(e.target.value);
         if (!isNaN(value) && value >= 0 && value <= 180) {
-            setLonDegrees(value);
+            updateLonDegrees(value);
         }
     };
 
     const handleLonArcminutesChange = (e) => {
         const value = parseInt(e.target.value);
         if (!isNaN(value) && value >= 0 && value <= 59) {
-            setLonArcminutes(value);
+            updateLonArcminutes(value);
         }
     };
 
     const handleLonArcsecondsChange = (e) => {
         const value = parseFloat(e.target.value);
         if (!isNaN(value) && value >= 0 && value < 60) {
-            setLonArcseconds(value);
+            updateLonArcseconds(value);
         }
     };
 
@@ -285,12 +362,12 @@ function App() {
 
     const useSearchResults = () => {
         if (searchResults) {
-            setRaHours(Math.floor(searchResults.raHms.h));
-            setRaMinutes(Math.floor(searchResults.raHms.m));
-            setRaSeconds(Math.round(searchResults.raHms.s * 100) / 100);
-            setDecDegrees(Math.floor(searchResults.decDms.d));
-            setDecArcminutes(Math.floor(searchResults.decDms.m));
-            setDecArcseconds(Math.round(searchResults.decDms.s * 100) / 100);
+            updateRaHours(Math.floor(searchResults.raHms.h));
+            updateRaMinutes(Math.floor(searchResults.raHms.m));
+            updateRaSeconds(Math.round(searchResults.raHms.s * 100) / 100);
+            updateDecDegrees(Math.floor(searchResults.decDms.d));
+            updateDecArcminutes(Math.floor(searchResults.decDms.m));
+            updateDecArcseconds(Math.round(searchResults.decDms.s * 100) / 100);
             setObjectName(searchResults.name);
             setSearchResults(null); // Clear search results
         }
@@ -311,6 +388,7 @@ function App() {
                 <p className="app-subtitle">
                     Visualizing the path of celestial objects across the night sky<br />
                 </p>
+                <h3 style={{ margin: '0 0 1rem 0', color: '#f22d7fff' }}>This is still very much a work in progress.</h3>
             </header>
 
             <main>
@@ -669,7 +747,7 @@ function App() {
                                             </label>
                                             <select
                                                 value={latDirection}
-                                                onChange={(e) => setLatDirection(e.target.value)}
+                                                onChange={(e) => updateLatDirection(e.target.value)}
                                                 style={{
                                                     width: '60px',
                                                     padding: '0.5rem',
@@ -757,7 +835,7 @@ function App() {
                                             </label>
                                             <select
                                                 value={lonDirection}
-                                                onChange={(e) => setLonDirection(e.target.value)}
+                                                onChange={(e) => updateLonDirection(e.target.value)}
                                                 style={{
                                                     width: '60px',
                                                     padding: '0.5rem',
@@ -915,8 +993,7 @@ function App() {
                             <div>
                                 <h3 style={{ color: '#ff4444', marginBottom: '0.5rem' }}>Red Line & Labels</h3>
                                 <p style={{ color: '#cccccc', margin: 0 }}>
-                                    Shows the path of the celestial object during nighttime hours (6 PM to 6 AM).
-                                    Red dots and labels mark the start (6 PM) and end (6 AM) of the observation period.
+                                    Shows the path of the celestial object during specified time range. 
                                 </p>
                             </div>
                             <div>
@@ -933,6 +1010,51 @@ function App() {
                             </div>
                         </div>
                     </div>
+                </div>
+
+                {/* Attribution Section */}
+                <div style={{
+                    marginTop: '3rem',
+                    padding: '2rem',
+                    borderTop: '2px solid #333333',
+                    textAlign: 'center',
+                    backgroundColor: 'rgba(0, 0, 0, 0.3)'
+                }}>
+                    <h3 style={{ 
+                        color: '#ffdd44', 
+                        marginBottom: '1rem',
+                        fontSize: '1.2rem'
+                    }}>
+                        Attribution
+                    </h3>
+                    <p style={{ 
+                        color: '#cccccc', 
+                        margin: '0.5rem 0',
+                        fontSize: '1rem'
+                    }}>
+                        This application is based on the original work by{' '}
+                        <strong style={{ color: '#ffdd44' }}>Ahmed Fasih</strong>
+                    </p>
+                    <p style={{ 
+                        color: '#cccccc', 
+                        margin: '0.5rem 0',
+                        fontSize: '0.9rem'
+                    }}>
+                        Original repository:{' '}
+                        <a 
+                            href="https://github.com/fasiha/starpath" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            style={{ 
+                                color: '#4A9EFF',
+                                textDecoration: 'none'
+                            }}
+                            onMouseOver={(e) => e.target.style.textDecoration = 'underline'}
+                            onMouseOut={(e) => e.target.style.textDecoration = 'none'}
+                        >
+                            github.com/fasiha/starpath
+                        </a>
+                    </p>
                 </div>
             </main>
         </div>

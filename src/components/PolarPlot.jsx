@@ -258,17 +258,6 @@ const PolarPlot = ({
             .style("fill", "#ffdd44")
             .style("stroke", "#ffffff")
             .style("stroke-width", "1px");
-            
-        // Add Polaris label
-        g.append("text")
-            .attr("x", polarisCoords.x)
-            .attr("y", polarisCoords.y + 20)
-            .attr("text-anchor", "middle")
-            .style("fill", "#ffdd44")
-            .style("font-size", "12px")
-            .style("font-weight", "bold")
-            .style("text-shadow", "1px 1px 2px rgba(0,0,0,0.8)")
-            .text("POLARIS");
     }
 
   }, [positionData, polarisPosition, width, height]);
